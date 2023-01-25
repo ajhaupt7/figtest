@@ -3,3 +3,5 @@ interface Item {
   end: string;
   name: string;
 }
+
+type ItemWithColor = Item & { color: string };

@@ -3,8 +3,22 @@ import { GanttChart as FinishedGanttChart, getColorFromString } from "@parssa/un
 import { GanttChart } from "components/GanttChart";
 import { items } from "constants/index";
 
+export const colors = [
+  'bg-red-500',
+  'bg-blue-500',
+  'bg-indigo-500',
+  'bg-orange-500',
+  'bg-amber-500',
+  'bg-yellow-500',
+  'bg-green-500',
+  'bg-emerald-500',
+  'bg-slate-500',
+  'bg-purple-500'
+]
+
 export default function Home() {
   const [showFinalProduct, setShowFinalProduct] = useState(false);
+  const [state, setState] = useState(getItemsWithColors());
 
   return (
     <>
@@ -29,8 +43,25 @@ export default function Home() {
         </div>
 
         {showFinalProduct && <FinishedGanttChart defaultItems={items} />}
-        <GanttChart className="mt-4" items={items} />
+        <GanttChart 
+          className="mt-4" 
+          items={state}
+          onItemClick={handleItemClick}
+          style={{ width: '750px' }} />
       </main>
     </>
   );
+
+  function getItemsWithColors(): ItemWithColor[] {
+    return items.map((item, index) => {
+      return {
+        ...item,
+        color: colors[index % 10]
+      }
+    })
+  }
+
+  function handleItemClick(name: string) {
+    setState(state.filter(item => item.name !== name));
+  }
 }

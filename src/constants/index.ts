@@ -1,7 +1,7 @@
 export const items = [
   {
-    start: "2022-10-01",
-    end: "2022-10-05",
+    start: "2022-10-21",
+    end: "2022-10-25",
     name: "Autocomplete MVP"
   },
   {
